@@ -215,7 +215,7 @@ void ArduinoHomebridgeMqtt::setValueToHomebridge(const char* name, const char* s
 }
 
 void ArduinoHomebridgeMqtt::publish(const char* topic, const char* payload) {
-  mqttClient.publish(topic, 0, true, payload);
+  mqttClient.publish(topic, 0, false, payload);
   // Serial.printf("Message sent [%s] %s\n", topic, payload);
 }
 
