@@ -43,23 +43,23 @@ void ArduinoHomebridgeMqtt::onSetValueFromHomebridge(std::function<void(const ch
   });
 }
 
-void ArduinoHomebridgeMqtt::initMqtt(IPAddress server) {
+void ArduinoHomebridgeMqtt::initMqtt(const char* server, uint16_t port) {
   mqttClient.onConnect([this](bool sessionPresent) -> void {
     Serial.println("connected");
     mqttClient.subscribe("homebridge/from/set", 0);
     mqttClient.subscribe("homebridge/from/response", 0);
     mqttClient.subscribe("homebridge/debug/set", 0);
   });
-  mqttClient.setServer(server, DEFAULT_MQTT_PORT);
+  mqttClient.setServer(server, port);
 }
 
-void ArduinoHomebridgeMqtt::connect(IPAddress server) {
-  initMqtt(server);
+void ArduinoHomebridgeMqtt::connect(const char* server, uint16_t port) {
+  initMqtt(server, port);
+  Serial.printf("Connecting to MQTT broker %s:%d...", server, port);
   connect();
 }
 
 void ArduinoHomebridgeMqtt::connect() {
-  Serial.print("Connecting to MQTT host...");
   while (!mqttClient.connected()) {
     mqttClient.connect();
     Serial.print(".");
