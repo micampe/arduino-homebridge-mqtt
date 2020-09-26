@@ -112,6 +112,29 @@ void ArduinoHomebridgeMqtt::addAccessory(const char* name, const char* serviceNa
   publish(topic, payload);
 }
 
+void ArduinoHomebridgeMqtt::setAccessoryReachable(const char* name, bool reachable) {
+  StaticJsonDocument<128> doc;
+  doc["name"] = name;
+  doc["reachable"] = reachable;
+  char payload[128];
+  serializeJson(doc, payload);
+  const char* topic = "homebridge/to/set/reachability";
+  publish(topic, payload);
+}
+
+void ArduinoHomebridgeMqtt::setAccessoryInfo(const char* name, const char* manufacturer, const char* model, const char* serial, const char* version) {
+  StaticJsonDocument<200> doc;
+  doc["name"] = name;
+  doc["manufacturer"] = manufacturer;
+  doc["model"] = model;
+  doc["serialnumber"] = serial;
+  doc["firmwarerevision"] = version;
+  char payload[200];
+  serializeJson(doc, payload);
+  const char* topic = "homebridge/to/set/accessoryinformation";
+  publish(topic, payload);
+}
+
 void ArduinoHomebridgeMqtt::addService(const char* name, const char* serviceName, const char* service) {
   StaticJsonDocument<128> doc;
   doc["name"] = name;

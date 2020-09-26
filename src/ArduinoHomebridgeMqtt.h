@@ -25,6 +25,8 @@ public:
   void addAccessory(const char* name, const char* serviceName, const char* service);
   void addAccessory(const char* name, const char* serviceName, const char* service, const char* characteristics[]);
   void addAccessory(const char* name, const char* serviceName, const char* service, JsonObjectConst characteristics);
+  void setAccessoryReachable(const char* name, bool reachable);
+  void setAccessoryInfo(const char* name, const char* manufacturer, const char* model, const char* serial, const char* version);
   void addService(const char* name, const char* serviceName, const char* service);
   void addService(const char* name, const char* serviceName, const char* service, const char* characteristics[]);
   void addService(const char* name, const char* serviceName, const char* service, JsonObjectConst characteristics);
